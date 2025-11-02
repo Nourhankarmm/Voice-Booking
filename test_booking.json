@@ -1,0 +1,7 @@
+{
+  "text": "I want to book an appointment with Dr. Ahmed",
+  "user_name": "John Doe",
+  "user_email": "john@example.com",
+  "doctor_name": "Dr. Ahmed",
+  "date": "2023-10-01T10:00:00"
+}
