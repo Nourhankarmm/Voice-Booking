@@ -16,3 +16,4 @@ accelerate
 datasets
 psycopg2-binary
 gtts
+langdetect

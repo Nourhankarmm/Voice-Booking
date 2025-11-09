@@ -137,11 +137,14 @@ voice_booking.db
 tmp/
 
 # Large model files (if not using LFS or if you want to ignore)
-# models/intent_model/models/
-# models/ner_model/models/
+models/*/models/
+models/*/output/
+models/*/backup_before_ft/
+models/*/new_checkpoints/
+models/*/subset_ft/
 
 # Data files (if large datasets should not be committed)
-# data/datasets/
+data/datasets/
 
 # IDE files
 .vscode/

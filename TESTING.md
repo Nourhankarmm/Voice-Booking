@@ -102,24 +102,29 @@ curl -X 'POST' \
 
 **Endpoint:** `POST /nlp/parse`
 
-**Purpose:** Analyze text for intent and extract entities.
+**Purpose:** Analyze text for intent and extract entities, with language detection or parameter support and fallback to English.
+
+**Request Body:**
+
+- `text`: The input text to parse.
+- `lang` (optional): Language code (e.g., "en", "ar", "hi", "bn", "sa"). If not provided, language is auto-detected. Falls back to "en" if unsupported.
 
 **Steps in Swagger:**
 
 1. Navigate to `/nlp/parse` endpoint.
 2. Click "Try it out".
-3. Enter text in the "text" field (e.g., "I want to book an appointment with Dr. Ahmed").
+3. Enter text in the "text" field and optionally "lang".
 4. Click "Execute".
-5. Check response: Should return intent, confidence, and entities.
+5. Check response: Should return intent, confidence, entities, and detected/used language.
 
-**Curl Example (English):**
+**Curl Example (English - Auto Detection):**
 
 ```bash
 curl -X 'POST' \
   'http://127.0.0.1:8000/nlp/parse' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '{"text": "I want to book an appointment with Dr. Ahmed"}'
+  -d '{"text": "I want to book an appointment with Dr. Ahmed tomorrow"}'
 ```
 
 **Expected Output (English):**
@@ -127,21 +132,21 @@ curl -X 'POST' \
 ```json
 {
   "intent": "book_appointment",
-  "confidence": [[0.0, 1.0]],
   "entities": {
-    "PERSON": "Dr. Ahmed"
+    "PERSON": "Dr. Ahmed",
+    "DATE": "tomorrow"
   }
 }
 ```
 
-**Curl Example (Hindi):**
+**Curl Example (Hindi - Auto Detection):**
 
 ```bash
 curl -X 'POST' \
   'http://127.0.0.1:8000/nlp/parse' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '{"text": "मैं डॉक्टर अहमद के साथ अपॉइंटमेंट बुक करना चाहता हूं"}'
+  -d '{"text": "मुझे कल डॉक्टर अहमद से अपॉइंटमेंट बुक करनी है"}'
 ```
 
 **Expected Output (Hindi):**
@@ -149,21 +154,21 @@ curl -X 'POST' \
 ```json
 {
   "intent": "book_appointment",
-  "confidence": [[0.0, 1.0]],
   "entities": {
-    "PERSON": "डॉक्टर अहमद"
+    "PERSON": "डॉक्टर अहमद",
+    "DATE": "कल"
   }
 }
 ```
 
-**Curl Example (Bengali):**
+**Curl Example (Bengali - Auto Detection):**
 
 ```bash
 curl -X 'POST' \
   'http://127.0.0.1:8000/nlp/parse' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '{"text": "আমি ডাক্তার আহমেদের সাথে একটি অ্যাপয়েন্টমেন্ট বুক করতে চাই"}'
+  -d '{"text": "আমি আগামীকাল ডাঃ আহমেদের সঙ্গে দেখা করতে চাই"}'
 ```
 
 **Expected Output (Bengali):**
@@ -171,36 +176,36 @@ curl -X 'POST' \
 ```json
 {
   "intent": "book_appointment",
-  "confidence": [[0.0, 1.0]],
   "entities": {
-    "PERSON": "ডাক্তার আহমেদ"
+    "PERSON": "ডাঃ আহমেদ",
+    "DATE": "আগামীকাল"
   }
 }
 ```
 
-**Curl Example (Arabic):**
+**Curl Example (Arabic - Saudi - Auto Detection):**
 
 ```bash
 curl -X 'POST' \
   'http://127.0.0.1:8000/nlp/parse' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '{"text": "أريد حجز موعد مع الدكتور أحمد"}'
+  -d '{"text": "أبغى أحجز موعد مع الدكتور أحمد بكرة"}'
 ```
 
-**Expected Output (Arabic):**
+**Expected Output (Arabic - Saudi):**
 
 ```json
 {
   "intent": "book_appointment",
-  "confidence": [[0.0, 1.0]],
   "entities": {
-    "PERSON": "الدكتور أحمد"
+    "PERSON": "الدكتور أحمد",
+    "DATE": "بكرة"
   }
 }
 ```
 
-**Verification:** Intent should be "book_appointment" for booking text in all languages; entities should extract doctor names, dates, etc.
+**Verification:** Intent should be "book_appointment" for booking text in all languages; entities should extract doctor names, dates, etc. Language detection and fallback are handled internally, but the output focuses on intent and entities.
 
 ## 3. Booking Logic Testing
 

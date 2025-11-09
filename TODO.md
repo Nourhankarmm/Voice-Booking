@@ -1,7 +1,7 @@
-# TODO: Implement FastAPI Booking Service
+# TODO: Adding Date Resolver to NLP Service
 
-- [x] Add psycopg2-binary to requirements.txt for PostgreSQL support
-- [x] Create app/db.py with SQLAlchemy setup for PostgreSQL and define models (users, doctors, bookings)
-- [x] Create app/routes/booking.py with booking_router and POST /book endpoint that creates a booking
-- [x] Update app/main.py to include the booking_router
-- [x] Test the booking endpoint to ensure it works with database
+## Tasks
+- [x] Modify `extract_entities` function in `app/routes/nlp_service.py` to add fallback extraction for date expressions if not detected by NER.
+- [x] Import or define date keywords from `date_resolver.py` for scanning the text.
+- [x] If a date phrase is found and "DATE" not in extracted entities, add it as "DATE" entity.
+- [x] Test the updated NLP service with example input to ensure DATE is extracted and resolved correctly.

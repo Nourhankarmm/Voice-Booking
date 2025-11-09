@@ -1,0 +1,42 @@
+[
+  {
+    "text": "I want to book an appointment with Dr. Ahmed tomorrow",
+    "expected": {
+      "intent": "book_appointment",
+      "entities": {
+        "PERSON": "Dr. Ahmed",
+        "DATE": "tomorrow"
+      }
+    }
+  },
+  {
+    "text": "मुझे कल डॉक्टर अहमद से अपॉइंटमेंट बुक करनी है",
+    "expected": {
+      "intent": "book_appointment",
+      "entities": {
+        "PERSON": "डॉक्टर अहमद",
+        "DATE": "कल"
+      }
+    }
+  },
+  {
+    "text": "আমি আগামীকাল ডাঃ আহমেদের সঙ্গে দেখা করতে চাই",
+    "expected": {
+      "intent": "book_appointment",
+      "entities": {
+        "PERSON": "ডাঃ আহমেদ",
+        "DATE": "আগামীকাল"
+      }
+    }
+  },
+  {
+    "text": "أبغى أحجز موعد مع الدكتور أحمد بكرة",
+    "expected": {
+      "intent": "book_appointment",
+      "entities": {
+        "PERSON": "الدكتور أحمد",
+        "DATE": "بكرة"
+      }
+    }
+  }
+]
